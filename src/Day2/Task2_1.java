@@ -4,6 +4,7 @@ package Day2;
  *1. The Arithmetic Operators
  *2. if-else-if
  *3. switch
+ *4. Logical operators
  */
 public class Task2_1 {
     public static void main(String[] args) {
