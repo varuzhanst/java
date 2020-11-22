@@ -4,8 +4,11 @@ package MobileServices;
 import MobileServices.model.SIMCard.SIMInternet;
 import MobileServices.model.SIMCard.SIMVoice;
 import MobileServices.model.Subscriber.StandardSubscriber;
+import MobileServices.model.Transaction.TransactionInternet;
+import MobileServices.model.Transaction.TransactionVoice;
 import MobileServices.service.SIMService;
 import MobileServices.service.SubscriberRegistrationService;
+import MobileServices.service.TransactionService;
 
 import java.util.Scanner;
 
@@ -19,22 +22,71 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("1. Internet SIM\n2. Voice SIM\nChoice : ");
         int cardType = scanner.nextInt();
+        SIMInternet simInternet = null;
+        SIMVoice simVoice = null;
         SIMService simService = new SIMService();
         switch (cardType){
             case 1:
-                SIMInternet simInternet = simService.SIMRegistrationInternet(standardSubscriber1);
+                simInternet = simService.SIMRegistrationInternet(standardSubscriber1);
                 System.out.println("\nRegistration is done!\n");
+                simInternet.addBalance(1000);
                 simService.showSIMinfo(simInternet);
+                System.out.println("New transaction");
+
+                System.out.print("1. Internet\nChoice : ");
+                int trType = scanner.nextInt();
+                TransactionService transactionService = new TransactionService();
+                switch (trType){
+                    case 1:
+                        TransactionInternet transactionInternet1 = transactionService.NewTransaction(25.20);
+                        System.out.println("New transaction is ready!");
+                        transactionService.TransactionInfo(transactionInternet1);
+                        transactionService.Perform(simInternet, transactionInternet1);
+                        System.out.println(" Balance after transaction : " + simInternet.getBalance());
+                        break;
+                    default:
+                        System.out.println("Invalid type");
+
+                }
                 break;
             case 2:
-                SIMVoice simVoice = simService.SIMRegistrationVoice(standardSubscriber1);
+                simVoice = simService.SIMRegistrationVoice(standardSubscriber1);
                 System.out.println("\nRegistration is done!\n");
+                simVoice.addBalance(1000);
                 simService.showSIMinfo(simVoice);
+                System.out.println("New transaction");
+
+                System.out.print("1. Internet\n2. Voice\nChoice : ");
+                trType = scanner.nextInt();
+                transactionService = new TransactionService();
+                switch (trType){
+                    case 1:
+                        TransactionInternet transactionInternet1 = transactionService.NewTransaction(25.20);
+                        System.out.println("New transaction is ready!");
+                        transactionService.TransactionInfo(transactionInternet1);
+                        transactionService.Perform(transactionInternet1, simVoice);
+                        System.out.println(" Balance after transaction : " + simVoice.getBalance());
+                        break;
+                    case 2:
+                        TransactionVoice transactionVoice1 = transactionService.NewTransaction(25);
+                        System.out.println("New transaction is ready!");
+                        transactionService.TransactionInfo(transactionVoice1);
+                        transactionService.Perform(transactionVoice1, simVoice);
+                        System.out.println(" Balance after transaction : " + simVoice.getBalance());
+                        break;
+                    default:
+                        System.out.println("Invalid type");
+
+                }
                 break;
             default:
                 System.out.println("Invalid type");
 
         }
+
+
+
+
 
 
 
