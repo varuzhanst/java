@@ -1,4 +1,4 @@
-package MobileServices.model.Transaction;
+package Day5.MobileServices.model.Transaction;
 
 public class TransactionInternet extends TransactionBlank {
     private double volumeMB;

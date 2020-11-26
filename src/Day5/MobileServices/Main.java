@@ -1,14 +1,14 @@
-package MobileServices;
+package Day5.MobileServices;
 
 
-import MobileServices.model.SIMCard.SIMInternet;
-import MobileServices.model.SIMCard.SIMVoice;
-import MobileServices.model.Subscriber.StandardSubscriber;
-import MobileServices.model.Transaction.TransactionInternet;
-import MobileServices.model.Transaction.TransactionVoice;
-import MobileServices.service.SIMService;
-import MobileServices.service.SubscriberRegistrationService;
-import MobileServices.service.TransactionService;
+import Day5.MobileServices.model.SIMCard.SIMInternet;
+import Day5.MobileServices.model.SIMCard.SIMVoice;
+import Day5.MobileServices.model.Subscriber.StandardSubscriber;
+import Day5.MobileServices.model.Transaction.TransactionInternet;
+import Day5.MobileServices.model.Transaction.TransactionVoice;
+import Day5.MobileServices.service.SIMService;
+import Day5.MobileServices.service.SubscriberRegistrationService;
+import Day5.MobileServices.service.TransactionService;
 
 import java.util.Scanner;
 

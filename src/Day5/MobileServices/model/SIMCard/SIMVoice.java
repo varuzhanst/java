@@ -1,6 +1,6 @@
-package MobileServices.model.SIMCard;
+package Day5.MobileServices.model.SIMCard;
 
-import MobileServices.model.Subscriber.StandardSubscriber;
+import Day5.MobileServices.model.Subscriber.StandardSubscriber;
 
 public class SIMVoice extends SIMBlank{
     public SIMVoice(String iccid, String msisdn, StandardSubscriber standardSubscriber) {

@@ -1,4 +1,4 @@
-package MobileServices.model.Subscriber;
+package Day5.MobileServices.model.Subscriber;
 
 public class Subscriber {
     private String firstname = "undefined";

@@ -1,8 +1,8 @@
-package MobileServices.service;
+package Day5.MobileServices.service;
 
-import MobileServices.model.SIMCard.SIMInternet;
-import MobileServices.model.SIMCard.SIMVoice;
-import MobileServices.model.Subscriber.StandardSubscriber;
+import Day5.MobileServices.model.SIMCard.SIMInternet;
+import Day5.MobileServices.model.SIMCard.SIMVoice;
+import Day5.MobileServices.model.Subscriber.StandardSubscriber;
 
 import java.util.Scanner;
 

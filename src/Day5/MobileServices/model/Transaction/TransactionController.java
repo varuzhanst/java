@@ -1,8 +1,7 @@
-package MobileServices.model.Transaction;
+package Day5.MobileServices.model.Transaction;
 
-import Day4.Classes.Models.Transaction;
-import MobileServices.model.SIMCard.SIMInternet;
-import MobileServices.model.SIMCard.SIMVoice;
+import Day5.MobileServices.model.SIMCard.SIMInternet;
+import Day5.MobileServices.model.SIMCard.SIMVoice;
 
 public class TransactionController implements Transactions {
 
