@@ -1,0 +1,4 @@
+Anna,Vardanyan,Mher,04.02.1998,F,AV0402998,Standard
+Arman,Harutyunyan,Andranik,11.04.1999,M,AH0041999,Standard
+Andranik,Poghosyan,Armen,15.12.2000,M,AP0122000,Standard
+Ani,Makaryan,Manvel,14.11.2001,F,AP0420777,Premier
