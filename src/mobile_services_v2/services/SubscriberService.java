@@ -5,6 +5,7 @@ import mobile_services_v2.models.subscribers.StandardSubscriber;
 import mobile_services_v2.models.subscribers.Subscriber;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class SubscriberService {
@@ -39,15 +40,15 @@ public class SubscriberService {
     }
 
     public static void subscriberSearch(String passport) {
-        String[] allSubscribers;
+        List<String> allSubscribers;
         try {
             boolean isFound = false;
             allSubscribers = FileService.readSubscribersAll();
-            for (int i = 0; i < allSubscribers.length; i++) {
-                String[] subscriber = allSubscribers[i].split(",");
+            for (int i = 0; i < allSubscribers.size(); i++) {
+                String[] subscriber = allSubscribers.get(i).split(",");
                 if (subscriber[5].equals(passport)) {
                     System.out.println("\nSubscriber found!\n");
-                    showAllInfo(getSubscriberFromText(allSubscribers[i]));
+                    showAllInfo(getSubscriberFromText(allSubscribers.get(i)));
                     isFound = true;
                     break;
                 }
@@ -63,7 +64,7 @@ public class SubscriberService {
     }
 
     public static void removeSubscriber(String passport) {
-        String[] allSubscribers;
+        List<String> allSubscribers;
         if (SIMService.isSIMFound(passport)) {
             System.out.println("Existing SIM found. Can't perform the action!");
             return;
@@ -71,22 +72,22 @@ public class SubscriberService {
         try {
             boolean isFound = false;
             allSubscribers = FileService.readSubscribersAll();
-            for (int i = 0; i < allSubscribers.length; i++) {
-                String[] subscriber = allSubscribers[i].split(",");
+            for (int i = 0; i < allSubscribers.size(); i++) {
+                String[] subscriber = allSubscribers.get(i).split(",");
                 if (subscriber[5].equals(passport)) {
                     isFound = true;
                     System.out.println("\nSubscriber found!\n");
-                    showAllInfo(getSubscriberFromText(allSubscribers[i]));
+                    showAllInfo(getSubscriberFromText(allSubscribers.get(i)));
                     System.out.println("\nDo you want to remove the subscriber?");
                     Scanner scanner = new Scanner(System.in);
                     System.out.print("Y / N:");
                     char choice = scanner.next().charAt(0);
                     if (choice == 'Y' || choice == 'y') {
                         FileService.clearSubscribers();
-                        for (int j = 0; j < allSubscribers.length; j++) {
-                            subscriber = allSubscribers[j].split(",");
+                        for (int j = 0; j < allSubscribers.size(); j++) {
+                            subscriber = allSubscribers.get(j).split(",");
                             if (!subscriber[5].equals(passport)) {
-                                FileService.writeSubscriber(getSubscriberFromText(allSubscribers[j]));
+                                FileService.writeSubscriber(getSubscriberFromText(allSubscribers.get(j)));
                             }
                         }
                     } else {
@@ -127,11 +128,11 @@ public class SubscriberService {
     }
 
     public static boolean isSubscriberFound(String passport) {
-        String[] allSubscribers;
+        List<String> allSubscribers;
         try {
             allSubscribers = FileService.readSubscribersAll();
-            for (int i = 0; i < allSubscribers.length; i++) {
-                String[] subscriber = allSubscribers[i].split(",");
+            for (int i = 0; i < allSubscribers.size(); i++) {
+                String[] subscriber = allSubscribers.get(i).split(",");
                 if (subscriber[5].equals(passport)) {
                     return true;
                 }
@@ -145,11 +146,11 @@ public class SubscriberService {
     }
 
     public static String getNameByPassport(String passport) {
-        String[] allSubscribers;
+        List<String> allSubscribers;
         try {
             allSubscribers = FileService.readSubscribersAll();
-            for (int i = 0; i < allSubscribers.length; i++) {
-                String[] subscriber = allSubscribers[i].split(",");
+            for (int i = 0; i < allSubscribers.size(); i++) {
+                String[] subscriber = allSubscribers.get(i).split(",");
                 if (subscriber[5].equals(passport)) {
                     return subscriber[0] + " " + subscriber[1];
                 }

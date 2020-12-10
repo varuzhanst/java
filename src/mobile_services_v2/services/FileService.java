@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
 
 public class FileService {
     public static final String SUBSCRIBERS_PATH = "D:\\IDEA projects\\Picsart\\src\\mobile_services_v2\\Subscribers.txt";
@@ -28,8 +29,8 @@ public class FileService {
 
     }
 
-    public static String[]  readSubscribersAll() throws IOException {
-        return Files.readAllLines(Paths.get(SUBSCRIBERS_PATH)).toArray(new String[0]);
+    public static List<String>  readSubscribersAll() throws IOException {
+        return Files.readAllLines(Paths.get(SUBSCRIBERS_PATH));
     }
     public static void clearSubscribers() throws IOException {
         String allInfo="";
@@ -47,8 +48,8 @@ public class FileService {
         Files.write(Paths.get(SIM_PATH),allInfo.getBytes(), StandardOpenOption.APPEND);
 
     }
-    public static String[]  readSIMsAll() throws IOException {
-        return Files.readAllLines(Paths.get(SIM_PATH)).toArray(new String[0]);
+    public static List<String> readSIMsAll() throws IOException {
+        return Files.readAllLines(Paths.get(SIM_PATH));
     }
     public static void clearSIMs() throws IOException {
         String allInfo="";

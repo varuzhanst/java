@@ -3,13 +3,12 @@ package mobile_services_v2.services;
 import mobile_services_v2.models.simcards.SIMBlank;
 import mobile_services_v2.models.simcards.SIMInternet;
 import mobile_services_v2.models.simcards.SIMVoice;
-import mobile_services_v2.models.subscribers.PremierSubscriber;
-import mobile_services_v2.models.subscribers.StandardSubscriber;
 import mobile_services_v2.models.transactions.InternetTransaction;
 import mobile_services_v2.models.transactions.VoiceTransaction;
 
-import javax.management.monitor.GaugeMonitor;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class SIMService {
@@ -39,14 +38,14 @@ public class SIMService {
     }
 
     public static void simSearchByMsisdn(String msisdn) {
-        String[] allSIMs;
+        List<String> allSIMs;
         try {
             boolean isFound = false;
             allSIMs = FileService.readSIMsAll();
-            for (int i = 0; i < allSIMs.length; i++) {
-                String[] SIM = allSIMs[i].split(",");
+            for (int i = 0; i < allSIMs.size(); i++) {
+                String[] SIM = allSIMs.get(i).split(",");
                 if (SIM[1].equals(msisdn)) {
-                    showSIMinfo(getSIMBlankFromText(allSIMs[i]));
+                    showSIMinfo(getSIMBlankFromText(allSIMs.get(i)));
                     isFound = true;
                     if (SIM[4].equals("Voice")) {
                         VoiceTransaction voiceTransaction = new VoiceTransaction();
@@ -169,13 +168,13 @@ public class SIMService {
     }
 
     public static void simSearchByPassport(String passport) {
-        String[] allSIMs;
+        List<String> allSIMs;
         try {
             boolean isFound = false;
             allSIMs = FileService.readSIMsAll();
             System.out.println("\nSIMs registered for " + passport);
-            for (int i = 0; i < allSIMs.length; i++) {
-                String[] SIM = allSIMs[i].split(",");
+            for (int i = 0; i < allSIMs.size(); i++) {
+                String[] SIM = allSIMs.get(i).split(",");
                 if (SIM[2].equals(passport)) {
                     System.out.println(SIM[1]);
                     isFound = true;
@@ -192,26 +191,26 @@ public class SIMService {
     }
 
     public static void removeSubscriber(String MSISDN) {
-        String[] allSIMs;
+        List<String> allSIMs;
         try {
             boolean isFound = false;
             allSIMs = FileService.readSIMsAll();
-            for (int i = 0; i < allSIMs.length; i++) {
-                String[] SIM = allSIMs[i].split(",");
+            for (int i = 0; i < allSIMs.size(); i++) {
+                String[] SIM = allSIMs.get(i).split(",");
                 if (SIM[1].equals(MSISDN)) {
                     isFound = true;
                     Scanner scanner = new Scanner(System.in);
                     System.out.println("\nSIM found!\n");
-                    showSIMinfo(getSIMBlankFromText(allSIMs[i]));
+                    showSIMinfo(getSIMBlankFromText(allSIMs.get(i)));
                     System.out.println("\nDo you want to remove the SIM?");
                     System.out.print("Y / N:");
                     char choice = scanner.next().charAt(0);
                     if (choice == 'Y' || choice == 'y') {
                         FileService.clearSIMs();
-                        for (int j = 0; j < allSIMs.length; j++) {
-                            SIM = allSIMs[j].split(",");
+                        for (int j = 0; j < allSIMs.size(); j++) {
+                            SIM = allSIMs.get(i).split(",");
                             if (!SIM[1].equals(MSISDN)) {
-                                FileService.writeSIM(getSIMBlankFromText(allSIMs[j]));
+                                FileService.writeSIM(getSIMBlankFromText(allSIMs.get(j)));
                             }
                         }
                     } else {
@@ -232,11 +231,11 @@ public class SIMService {
     }
 
     public static boolean isSIMFound(String passport) {
-        String[] allSIMs;
+        List<String> allSIMs;
         try {
             allSIMs = FileService.readSIMsAll();
-            for (int i = 0; i < allSIMs.length; i++) {
-                String[] subscriber = allSIMs[i].split(",");
+            for (int i = 0; i < allSIMs.size(); i++) {
+                String[] subscriber = allSIMs.get(i).split(",");
                 if (subscriber[2].equals(passport)) {
                     return true;
                 }
@@ -249,13 +248,13 @@ public class SIMService {
     }
 
     public static double getBalanceByMsisdn(String msisdn) {
-        String[] allSIMs;
+        List<String> allSIMs;
         try {
             allSIMs = FileService.readSIMsAll();
-            for (int i = 0; i < allSIMs.length; i++) {
-                String[] SIM = allSIMs[i].split(",");
+            for (int i = 0; i < allSIMs.size(); i++) {
+                String[] SIM = allSIMs.get(i).split(",");
                 if (SIM[1].equals(msisdn)) {
-                    return getSIMBlankFromText(allSIMs[i]).getBalance();
+                    return getSIMBlankFromText(allSIMs.get(i)).getBalance();
 
                 }
             }
@@ -267,21 +266,21 @@ public class SIMService {
     }
 
     public static void changeBalanceByMsisdn(String msisdn, double amount) throws Exception {
-        String[] allSIMs;
+        List<String> allSIMs;
         try {
             allSIMs = FileService.readSIMsAll();
-            for (int i = 0; i < allSIMs.length; i++) {
-                String[] SIM = allSIMs[i].split(",");
+            for (int i = 0; i < allSIMs.size(); i++) {
+                String[] SIM = allSIMs.get(i).split(",");
                 if (SIM[1].equals(msisdn)) {
                     SIM[3] = Double.parseDouble(SIM[3]) + amount + "";
                     if (Double.parseDouble(SIM[3]) < 0) throw new Exception("Insufficient balance!");
-                    allSIMs[i] = SIM[0] + "," + SIM[1] + "," + SIM[2] + "," + SIM[3] + "," + SIM[4];
+                    allSIMs.set(i,SIM[0] + "," + SIM[1] + "," + SIM[2] + "," + SIM[3] + "," + SIM[4]);
                 }
 
             }
             FileService.clearSIMs();
-            for (int j = 0; j < allSIMs.length; j++) {
-                FileService.writeSIM(getSIMBlankFromText(allSIMs[j]));
+            for (int j = 0; j < allSIMs.size(); j++) {
+                FileService.writeSIM(getSIMBlankFromText(allSIMs.get(j)));
             }
         } catch (IOException e) {
             e.printStackTrace();
