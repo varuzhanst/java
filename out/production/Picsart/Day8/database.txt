@@ -1,3 +1,6 @@
 Varuzhan Stepanyan,varuzhan1999,varuzhan@gmail.com,df97bb5abc1c47de78dbb7863b1f1808
 Ani Hakobyan,anihakobyan2020,ani@gmail.com,9f8ee1aff28ec413ab3f2555eee80ae5
 Manuk Karapetyan,mankkarapetyan,manukk@ucom.am,e0a5015f36ac8df5bceddba029342d09
+Alla Petrosyan,allapetro2000,allapetros@yahoo.com,e969abd97616697bac4ea937f68b5124
+Anna Petrosyan,annapetrosyan,anna@petro.com,47d3eab9104326f00476a4b685b84565
+Ani Zaqaryan,anizaqaryan,ani.zaqaryan@gmail.com,8e869f4db3f50d466d0ea5563669cc24

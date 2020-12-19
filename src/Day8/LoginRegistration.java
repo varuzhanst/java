@@ -4,7 +4,6 @@ import Day8.models.User;
 import Day8.service.FileService;
 import Day8.service.MD5;
 import Day8.service.UserService;
-import Day8.service.Validate;
 
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -37,7 +36,6 @@ public class LoginRegistration {
                         password = scanner.next();
                         loggedInUser = UserService.loginByUsernamePassword(username, MD5.getMd5(password));
                         if (loggedInUser != null) {
-                            System.out.println("Congratulations! You are successfully logged in!");
                             UserService.welcomeMessage(loggedInUser);
                         } else System.out.println("Wrong username and/or password");
                     } while (loggedInUser == null);
@@ -71,7 +69,6 @@ public class LoginRegistration {
                             } catch (Exception e) {
                                 System.out.println("Write operation failure.");
                             }
-                            UserService.welcomeMessage(registeredUser);
                         }
                     } while (registeredUser == null);
                     break;

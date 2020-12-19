@@ -10,7 +10,7 @@ public class Validate {
 
 
     public static boolean isEmailValid(final String email) {
-        Pattern pattern = Pattern.compile("^(.+)@(\\S+)$");
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
