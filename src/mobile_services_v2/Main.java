@@ -1,19 +1,100 @@
 package mobile_services_v2;
 
+import mobile_services_v2.models.User;
 import mobile_services_v2.models.simcards.SIMBlank;
 import mobile_services_v2.models.subscribers.Subscriber;
 import mobile_services_v2.services.FileService;
 import mobile_services_v2.services.SIMService;
 import mobile_services_v2.services.SubscriberService;
+import mobile_services_v2.usermanagment.MD5;
+import mobile_services_v2.usermanagment.UserFileService;
+import mobile_services_v2.usermanagment.UserService;
+
+
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Main {
     public static void main(String[] args) {
+        User loggedInUser=null;
+        Scanner scanner = new Scanner(System.in);
+        do{
+            {
+                int choice = -1;
+                System.out.println("1. Login");
+                System.out.println("2. Registration");
+                System.out.println("0. Exit");
+                System.out.print(">>");
+                String possibleChoice = scanner.next();
+                if (Character.isDigit(possibleChoice.charAt(0)))
+                    choice = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
+
+                switch (choice) {
+                    case 1: {
+                        String username, password;
+                        do {
+
+                            System.out.print("Username (or -1 to exit) : ");
+                            username = scanner.next();
+                            if (username.equals("-1")) break;
+                            System.out.print("Password : ");
+                            password = scanner.next();
+                            loggedInUser = UserService.loginByUsernamePassword(username, MD5.getMd5(password));
+                            if (loggedInUser != null) {
+                                UserService.welcomeMessage(loggedInUser);
+                            } else System.out.println("Wrong username and/or password");
+                        } while (loggedInUser == null);
+
+                        break;
+                    }
+                    case 2: {
+                        User registeredUser;
+                        String fullName, username, email, password;
+                        do {
+                            System.out.print("Full name (-1 to exit): ");
+                            scanner.nextLine();
+                            fullName = scanner.nextLine();
+                            if(fullName.equals("-1")) break;
+                            System.out.print("Username : ");
+                            username = scanner.next();
+                            System.out.print("Email : ");
+                            email = scanner.next();
+                            System.out.print("Password : ");
+                            password = scanner.next();
+                            registeredUser = UserService.newUserRegistration(fullName, username, email, password);
+                            if (registeredUser != null) {
+                                System.out.println("Congratulations! Now you can log in.");
+                                StringJoiner userInfo = new StringJoiner(",");
+                                userInfo.add(registeredUser.getFull_name());
+                                userInfo.add(registeredUser.getUsername());
+                                userInfo.add(registeredUser.getEmail());
+                                userInfo.add(registeredUser.getPassword());
+                                try {
+                                    UserFileService.write("\n"+userInfo.toString());
+                                } catch (Exception e) {
+                                    System.out.println("Write operation failure.");
+                                }
+                            }
+                        } while (registeredUser == null);
+                        break;
+                    }
+                    case 0: {
+                        System.out.println("Session is terminated");
+                        return;
+                    }
+                    default: {
+                        System.out.println("Invalid selection");
+                        break;
+                    }
+                }
+
+            }
+        }while(loggedInUser==null);
+
         boolean isActive = true;
         int selection;
-        Scanner scanner = new Scanner(System.in);
         while (isActive) {
             System.out.println("\nActions with : ");
             System.out.println("1.Subscribers");
@@ -129,7 +210,7 @@ public class Main {
                         case 4: {
                             System.out.println("Terminate SIM");
                             System.out.print("MSISDN : ");
-                            SIMService.removeSubscriber(scanner.next());
+                            SIMService.removeMSISDN(scanner.next());
                             continue;
 
                         }

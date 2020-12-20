@@ -190,7 +190,7 @@ public class SIMService {
 
     }
 
-    public static void removeSubscriber(String MSISDN) {
+    public static void removeMSISDN(String MSISDN) {
         List<String> allSIMs;
         try {
             boolean isFound = false;
@@ -208,7 +208,7 @@ public class SIMService {
                     if (choice == 'Y' || choice == 'y') {
                         FileService.clearSIMs();
                         for (int j = 0; j < allSIMs.size(); j++) {
-                            SIM = allSIMs.get(i).split(",");
+                            SIM = allSIMs.get(j).split(",");
                             if (!SIM[1].equals(MSISDN)) {
                                 FileService.writeSIM(getSIMBlankFromText(allSIMs.get(j)));
                             }
