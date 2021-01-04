@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SubscriberService {
-    public static Subscriber subscriberRegisteration() {
+    public static Subscriber subscriberRegistration() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("First Name : ");
         String firstName = scanner.next();
@@ -19,7 +19,7 @@ public class SubscriberService {
         String middleName = scanner.next();
         System.out.print("Male or Female? / M or F : ");
         char gender = scanner.next().charAt(0);
-        System.out.print("Date ob birth (DD.MM.YYYY) : ");
+        System.out.print("Date of birth (DD.MM.YYYY) : ");
         String dob_plain = scanner.next();
         System.out.print("Passport : ");
         String passport = scanner.next();
@@ -34,8 +34,9 @@ public class SubscriberService {
     public static void subscriberAddition(Subscriber subscriber) {
         try {
             FileService.writeSubscriber(subscriber);
+            System.out.println("The subscriber is registered.\n");
         } catch (IOException e) {
-            System.out.println("Error 404: File not found");
+            System.out.println("Error -> File not found");
         }
     }
 
@@ -108,6 +109,7 @@ public class SubscriberService {
     }
 
     public static void showAllInfo(Subscriber subscriber) {
+        System.out.println("==========================");
         System.out.println("First name : " + subscriber.getFirstName());
         System.out.println("Last name : " + subscriber.getLastName());
         System.out.println("Middle name : " + subscriber.getMiddleName());
@@ -117,6 +119,7 @@ public class SubscriberService {
         System.out.print("Subscriber type : " );
         if(subscriber instanceof StandardSubscriber) System.out.println("Standard");
         else if(subscriber instanceof PremierSubscriber)  System.out.println("Premier");
+        System.out.println("==========================");
     }
 
     private static Subscriber getSubscriberFromText(String subscriber) {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class UserFileService {
-    public static final Path PATH = Paths.get("D:\\IDEA projects\\Picsart\\src\\mobile_services_v2\\database.txt");
+    public static final Path PATH = Paths.get("src/mobile_services_v2/Database.txt");
 
     public static ArrayList<String> readAll() throws Exception {
         return (ArrayList<String>)Files.readAllLines(PATH);

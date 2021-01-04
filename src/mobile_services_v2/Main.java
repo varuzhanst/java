@@ -10,17 +10,15 @@ import mobile_services_v2.usermanagment.MD5;
 import mobile_services_v2.usermanagment.UserFileService;
 import mobile_services_v2.usermanagment.UserService;
 
-
-
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Main {
     public static void main(String[] args) {
-        User loggedInUser=null;
+        User loggedInUser = null;
         Scanner scanner = new Scanner(System.in);
-        do{
+        do {
             {
                 int choice = -1;
                 System.out.println("1. Login");
@@ -56,7 +54,7 @@ public class Main {
                             System.out.print("Full name (-1 to exit): ");
                             scanner.nextLine();
                             fullName = scanner.nextLine();
-                            if(fullName.equals("-1")) break;
+                            if (fullName.equals("-1")) break;
                             System.out.print("Username : ");
                             username = scanner.next();
                             System.out.print("Email : ");
@@ -72,7 +70,7 @@ public class Main {
                                 userInfo.add(registeredUser.getEmail());
                                 userInfo.add(registeredUser.getPassword());
                                 try {
-                                    UserFileService.write("\n"+userInfo.toString());
+                                    UserFileService.write("\n" + userInfo.toString());
                                 } catch (Exception e) {
                                     System.out.println("Write operation failure.");
                                 }
@@ -91,18 +89,19 @@ public class Main {
                 }
 
             }
-        }while(loggedInUser==null);
+        } while (loggedInUser == null);
 
         boolean isActive = true;
-        int selection;
+        int selection = -1;
         while (isActive) {
             System.out.println("\nActions with : ");
             System.out.println("1.Subscribers");
             System.out.println("2.SIM cards");
             System.out.println("0.Exit");
-            System.out.print("Choice:");
-
-            selection = scanner.nextInt();
+            System.out.print(">>");
+            String possibleChoice = scanner.next();
+            if (Character.isDigit(possibleChoice.charAt(0)))
+                selection = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
             switch (selection) {
                 case 1: {
                     System.out.println("\nSubscribers");
@@ -110,11 +109,13 @@ public class Main {
                     System.out.println("2.Search");
                     System.out.println("3.Remove");
                     System.out.println("0.Back");
-                    System.out.print("Choice:");
-                    selection = scanner.nextInt();
+                    System.out.print(">>");
+                    possibleChoice = scanner.next();
+                    if (Character.isDigit(possibleChoice.charAt(0)))
+                        selection = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
                     switch (selection) {
                         case 1: {
-                            Subscriber subscriber = SubscriberService.subscriberRegisteration();
+                            Subscriber subscriber = SubscriberService.subscriberRegistration();
                             System.out.println("\nDo you want to register a new subscriber with the following information?");
                             SubscriberService.showAllInfo(subscriber);
                             System.out.print("Y / N:");
@@ -125,8 +126,6 @@ public class Main {
                                 System.out.println("Registration terminated!");
                                 continue;
                             }
-
-                            System.out.println("The subscriber is registered.\n");
                             continue;
                         }
                         case 2: {
@@ -161,16 +160,19 @@ public class Main {
                     System.out.println("3.Search by passport");
                     System.out.println("4.SIM termination");
                     System.out.println("0.Back");
-                    System.out.print("Choice:");
-                    selection = scanner.nextInt();
+                    System.out.print(">>");
+                    possibleChoice = scanner.next();
+                    if (Character.isDigit(possibleChoice.charAt(0)))
+                        selection = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
                     switch (selection) {
                         case 1: {
                             System.out.println("\nSearching");
                             String passport;
-                            do {System.out.print("Passport (or exit): ");
-                               passport = scanner.next();
-                               if (passport.equals("exit")) break;
-                            }while(!SubscriberService.isSubscriberFound(passport));
+                            do {
+                                System.out.print("Passport (or exit): ");
+                                passport = scanner.next();
+                                if (passport.equals("exit")) break;
+                            } while (!SubscriberService.isSubscriberFound(passport));
                             if (passport.equals("exit")) continue;
                             System.out.println();
                             SubscriberService.subscriberSearch(passport);
@@ -186,7 +188,7 @@ public class Main {
                                     e.printStackTrace();
                                 }
                             } else {
-                                System.out.println("Registration terminated!");
+                                System.out.println("Registration is terminated!");
                                 continue;
                             }
 
@@ -208,7 +210,7 @@ public class Main {
 
                         }
                         case 4: {
-                            System.out.println("Terminate SIM");
+                            System.out.println("\nTerminate SIM");
                             System.out.print("MSISDN : ");
                             SIMService.removeMSISDN(scanner.next());
                             continue;
@@ -229,7 +231,7 @@ public class Main {
                 }
                 default: {
                     System.out.println("Invalid input\n");
-                    continue;
+
                 }
             }
 

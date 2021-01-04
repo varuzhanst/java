@@ -12,8 +12,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileService {
-    public static final String SUBSCRIBERS_PATH = "D:\\IDEA projects\\Picsart\\src\\mobile_services_v2\\Subscribers.txt";
-    public static final String SIM_PATH = "D:\\IDEA projects\\Picsart\\src\\mobile_services_v2\\SimCards.txt";
+    public static final String SUBSCRIBERS_PATH = "src/mobile_services_v2/Subscribers.txt";
+    public static final String SIM_PATH = "src/mobile_services_v2/SimCards.txt";
 
     public static void writeSubscriber(Subscriber subscriber) throws IOException {
         String allInfo= subscriber.getFirstName() + ","

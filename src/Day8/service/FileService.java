@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 public class FileService {
-    public static final Path PATH = Paths.get("D:\\IDEA projects\\Picsart\\src\\Day8\\database.txt");
+    public static final Path PATH = Paths.get("D:\\IDEA projects\\Picsart\\src\\Day8\\Database.txt");
 
     public static ArrayList<String> readAll() throws Exception {
         return (ArrayList<String>)Files.readAllLines(PATH);

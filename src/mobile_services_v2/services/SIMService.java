@@ -13,12 +13,14 @@ import java.util.Scanner;
 
 public class SIMService {
     public static SIMBlank SIMregistration(String Passport) {
-        int type;
+        int type=-1;
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.print("1. Voice\n2. Internet\nChoice : ");
-            type = scanner.nextInt();
-        } while (type < 0 && type > 2);
+            System.out.print("1. Voice\n2. Internet\n>>");
+            String possibleChoice = scanner.next();
+            if (Character.isDigit(possibleChoice.charAt(0)))
+                type = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
+        } while (type < 0 || type > 2);
         System.out.print("ICCID (8 digits): ");
         String iccid = scanner.next();
         iccid ="8937410"+ iccid + type;
@@ -30,11 +32,13 @@ public class SIMService {
     }
 
     public static void showSIMinfo(SIMBlank simBlank) {
+        System.out.println("==========================");
         System.out.println("MSISDN : " + simBlank.getMsisdn());
         System.out.println("ICCID : " + simBlank.getIccid());
         System.out.println("Passport : " + simBlank.getHolderPassport());
         System.out.println("Holder : " + SubscriberService.getNameByPassport(simBlank.getHolderPassport()));
         System.out.println("Balance : " + simBlank.getBalance());
+        System.out.println("==========================");
     }
 
     public static void simSearchByMsisdn(String msisdn) {
@@ -55,7 +59,10 @@ public class SIMService {
                         System.out.println("0.Main menu");
                         System.out.print("Choice : ");
                         Scanner scanner = new Scanner(System.in);
-                        int choice = scanner.nextInt();
+                        int choice = -1;
+                        String possibleChoice = scanner.next();
+                        if (Character.isDigit(possibleChoice.charAt(0)))
+                            choice = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
                         switch (choice) {
                             case 1:
                                 int amount;
@@ -110,7 +117,10 @@ public class SIMService {
                         System.out.println("0.Main menu");
                         System.out.print("Choice : ");
                         Scanner scanner = new Scanner(System.in);
-                        int choice = scanner.nextInt();
+                        int choice = -1;
+                        String possibleChoice = scanner.next();
+                        if (Character.isDigit(possibleChoice.charAt(0)))
+                            choice = Integer.parseInt(String.valueOf(possibleChoice.charAt(0)));
                         switch (choice) {
                             case 1:
                                 int amount;
