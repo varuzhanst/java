@@ -24,6 +24,10 @@ public abstract class Subscriber {
         return firstName;
     }
 
+    /**
+     * any non-blank String is set
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         if(firstName.length()>0)
         this.firstName = firstName;
@@ -34,6 +38,10 @@ public abstract class Subscriber {
         return lastName;
     }
 
+    /**
+     * Any non-blank String is set
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         if(lastName.length()>0)
             this.lastName = lastName;
@@ -44,7 +52,10 @@ public abstract class Subscriber {
     public String getMiddleName() {
         return middleName;
     }
-
+    /**
+     * Any non-blank String is set
+     * @param middleName
+     */
     public void setMiddleName(String middleName) {
         if(middleName.length()>0)
             this.middleName = middleName;
@@ -56,6 +67,10 @@ public abstract class Subscriber {
         return birthday;
     }
 
+    /**
+     * The birthday should be in DD.MM.YYYY format
+     * @param birthday
+     */
     public void setBirthday(String birthday) {
         if(birthday.length()==10)
             this.birthday = birthday;
@@ -67,6 +82,10 @@ public abstract class Subscriber {
         return passport;
     }
 
+    /**
+     * any String with 9 characters length
+     * @param passport
+     */
     public void setPassport(String passport) {
         if(passport.length()==9)
             this.passport = passport;
@@ -77,6 +96,10 @@ public abstract class Subscriber {
         return gender;
     }
 
+    /**
+     * gender can be only m,f,F or M
+     * @param gender
+     */
     public void setGender(char gender) {
 
         if(gender=='m'||gender=='f'||gender=='M'||gender=='F')

@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SubscriberService {
+    /**
+     * returning a new Subscriber based on User input
+     * @return
+     */
     public static Subscriber subscriberRegistration() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("First Name : ");
@@ -31,6 +35,10 @@ public class SubscriberService {
 
     }
 
+    /**
+     * Extracting subscriber and writing in the file
+     * @param subscriber
+     */
     public static void subscriberAddition(Subscriber subscriber) {
         try {
             FileService.writeSubscriber(subscriber);
@@ -40,6 +48,10 @@ public class SubscriberService {
         }
     }
 
+    /**
+     * Looking for a subscriber by passport and showing information if one is found
+     * @param passport
+     */
     public static void subscriberSearch(String passport) {
         List<String> allSubscribers;
         try {
@@ -64,6 +76,10 @@ public class SubscriberService {
 
     }
 
+    /**
+     * removing subscriber from a file if no SIM is registered under the passport
+     * @param passport
+     */
     public static void removeSubscriber(String passport) {
         List<String> allSubscribers;
         if (SIMService.isSIMFound(passport)) {
@@ -108,6 +124,10 @@ public class SubscriberService {
 
     }
 
+    /**
+     * extracting subscriber and showing information
+     * @param subscriber
+     */
     public static void showAllInfo(Subscriber subscriber) {
         System.out.println("==========================");
         System.out.println("First name : " + subscriber.getFirstName());
@@ -122,6 +142,11 @@ public class SubscriberService {
         System.out.println("==========================");
     }
 
+    /**
+     * returning a new subscriber based on provided String
+     * @param subscriber
+     * @return
+     */
     private static Subscriber getSubscriberFromText(String subscriber) {
         String[] subscriber_split = subscriber.split(",");
         if (subscriber_split[6].equals("Premier"))
@@ -130,6 +155,11 @@ public class SubscriberService {
             return new StandardSubscriber(subscriber_split[0], subscriber_split[1], subscriber_split[2], subscriber_split[3], subscriber_split[5], subscriber_split[4].charAt(0));
     }
 
+    /**
+     * looking for a subscriber and returning true in case one id found
+     * @param passport
+     * @return
+     */
     public static boolean isSubscriberFound(String passport) {
         List<String> allSubscribers;
         try {
@@ -148,6 +178,11 @@ public class SubscriberService {
 
     }
 
+    /**
+     * Getting first and last name by provided passport
+     * @param passport
+     * @return
+     */
     public static String getNameByPassport(String passport) {
         List<String> allSubscribers;
         try {

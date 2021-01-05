@@ -7,6 +7,12 @@ import mobile_services_v2.models.User;
 import java.util.ArrayList;
 
 public class UserService {
+    /**
+     * User authentication
+     * @param username
+     * @param password
+     * @return
+     */
     public static User loginByUsernamePassword(String username, String password) {
         User PossibleUser = getUserByUsername(username);
         if (PossibleUser == null) return null;
@@ -15,6 +21,14 @@ public class UserService {
         else return null;
     }
 
+    /**
+     * if all provided info are valid then new User is being returned
+     * @param fullName
+     * @param username
+     * @param email
+     * @param password
+     * @return
+     */
     public static User newUserRegistration(String fullName, String username, String email, String password) {
         if (!Validate.isFullNameValid(fullName)) {
             System.out.println("Check your full name.");
@@ -32,6 +46,11 @@ public class UserService {
 
     }
 
+    /**
+     * getting a user by provided username
+     * @param username
+     * @return
+     */
     public static User getUserByUsername(String username) {
         ArrayList<String> UsersList;
         try {
@@ -48,6 +67,11 @@ public class UserService {
 
         return null;
     }
+
+    /**
+     * printing welcome message by provided user
+     * @param user
+     */
     public static void welcomeMessage(User user){
         System.out.println("Hi, " + user.getFull_name());
         System.out.println("Your Email is " + user.getEmail());

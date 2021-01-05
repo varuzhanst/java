@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SIMService {
+    /**
+     * getting the information from user and returning new SIM card
+     * @param Passport
+     * @return
+     */
     public static SIMBlank SIMregistration(String Passport) {
         int type=-1;
         Scanner scanner = new Scanner(System.in);
@@ -31,6 +36,10 @@ public class SIMService {
         else return new SIMInternet(msisdn, iccid, Passport, 0);
     }
 
+    /**
+     * extracting SIM and showing information about it
+     * @param simBlank
+     */
     public static void showSIMinfo(SIMBlank simBlank) {
         System.out.println("==========================");
         System.out.println("MSISDN : " + simBlank.getMsisdn());
@@ -41,6 +50,10 @@ public class SIMService {
         System.out.println("==========================");
     }
 
+    /**
+     * looking for the SIM by MSISDN and showing actions menu if one is found
+     * @param msisdn
+     */
     public static void simSearchByMsisdn(String msisdn) {
         List<String> allSIMs;
         try {
@@ -169,6 +182,11 @@ public class SIMService {
 
     }
 
+    /**
+     * returning a new SIM based on provided String
+     * @param SIM
+     * @return
+     */
     public static SIMBlank getSIMBlankFromText(String SIM) {
         String[] SIM_full = SIM.split(",");
         if (SIM_full[4] .equals("Internet") )
@@ -177,6 +195,11 @@ public class SIMService {
 
     }
 
+    /**
+     * Showing all MSISDNs based on provided passport
+     * @param passport
+     *
+     */
     public static void simSearchByPassport(String passport) {
         List<String> allSIMs;
         try {
@@ -200,6 +223,10 @@ public class SIMService {
 
     }
 
+    /**
+     * looking for the MSISDN based on provided MSISDN and removing if one is found
+     * @param MSISDN
+     */
     public static void removeMSISDN(String MSISDN) {
         List<String> allSIMs;
         try {
@@ -240,6 +267,11 @@ public class SIMService {
 
     }
 
+    /**
+     * checking if there are any MSISDN under provided passport
+     * @param passport
+     * @return
+     */
     public static boolean isSIMFound(String passport) {
         List<String> allSIMs;
         try {
@@ -257,6 +289,11 @@ public class SIMService {
 
     }
 
+    /**
+     * showing balance by MSISDN
+     * @param msisdn
+     * @return
+     */
     public static double getBalanceByMsisdn(String msisdn) {
         List<String> allSIMs;
         try {
@@ -275,6 +312,12 @@ public class SIMService {
         return -1;
     }
 
+    /**
+     * increasing or decreasing the balance by MSISDN
+     * @param msisdn
+     * @param amount
+     * @throws Exception
+     */
     public static void changeBalanceByMsisdn(String msisdn, double amount) throws Exception {
         List<String> allSIMs;
         try {

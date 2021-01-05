@@ -1,2 +1,4 @@
 Arman,Petrosyan,Hakob,11.04.1995,M,AP0112233,Premier
 Anna,Petrosyan,Manuk,11.04.1999,F,AN0445566,Standard
+Poghos,Petrosyan,Tigran,11.10.2001,M,PP0111111,Premier
+Anna,Ghazaryan,Mnatsakan,11.12.1998,F,AG0774411,Premier

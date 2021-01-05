@@ -15,6 +15,11 @@ public class FileService {
     public static final String SUBSCRIBERS_PATH = "src/mobile_services_v2/Subscribers.txt";
     public static final String SIM_PATH = "src/mobile_services_v2/SimCards.txt";
 
+    /**
+     * Extracting subscriber info and writing it in the file with a path : SUBSCRIBERS_PATH
+     * @param subscriber
+     * @throws IOException
+     */
     public static void writeSubscriber(Subscriber subscriber) throws IOException {
         String allInfo= subscriber.getFirstName() + ","
                 + subscriber.getLastName() + ","
@@ -29,14 +34,30 @@ public class FileService {
 
     }
 
+    /**
+     * getting all subscribers from the file with a path : SUBSCRIBERS_PATH
+     * @return
+     * @throws IOException
+     */
     public static List<String>  readSubscribersAll() throws IOException {
         return Files.readAllLines(Paths.get(SUBSCRIBERS_PATH));
     }
+
+    /**
+     * clearing the file with a path : SUBSCRIBERS_PATH
+     * @throws IOException
+     */
     public static void clearSubscribers() throws IOException {
         String allInfo="";
         Files.write(Paths.get(SUBSCRIBERS_PATH),allInfo.getBytes());
 
     }
+
+    /**
+     * Extracting SIM info and writing it in the file with a path : SIM_PATH
+     * @param simBlank
+     * @throws IOException
+     */
     public static void writeSIM(SIMBlank simBlank) throws IOException {
         String allInfo= simBlank.getIccid() + ","
                 + simBlank.getMsisdn()+","
@@ -48,9 +69,21 @@ public class FileService {
         Files.write(Paths.get(SIM_PATH),allInfo.getBytes(), StandardOpenOption.APPEND);
 
     }
+
+    /**
+     * getting all SIMs from the file with a path : SIM_PATH
+     * @return
+     * @throws IOException
+     */
     public static List<String> readSIMsAll() throws IOException {
         return Files.readAllLines(Paths.get(SIM_PATH));
     }
+
+    /**
+     * clearing the file with a path : SIM_PATH
+     * @throws IOException
+     */
+
     public static void clearSIMs() throws IOException {
         String allInfo="";
         Files.write(Paths.get(SIM_PATH),allInfo.getBytes());
